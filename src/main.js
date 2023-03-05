@@ -1,8 +1,15 @@
 import { createApp } from "vue";
+import mitt from "mitt";
 import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
 import "./assets/base.css";
 
-createApp(App).use(store).use(router).mount("#app");
+const app = createApp(App);
+
+const emitter = mitt();
+
+app.config.globalProperties.$emitter = emitter;
+
+app.use(store).use(router).mount("#app");

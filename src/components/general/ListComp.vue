@@ -1,7 +1,12 @@
 <template>
   <ul v-if="any">
-    <Item v-for="item in items" :key="item.id" :class="type">
-      {{ item[itemKey] }}
+    <Item v-for="item in items" :key="item.id">
+      <router-link
+        :to="{ name: type, params: { contactId: item.id } }"
+        :class="type"
+      >
+        {{ item[itemKey] }}
+      </router-link>
     </Item>
   </ul>
 </template>

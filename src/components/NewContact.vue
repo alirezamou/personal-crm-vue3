@@ -20,7 +20,7 @@ export default {
   computed: {},
   methods: {
     addContact(contact) {
-      this.$store.commit("addContact", extractDetails(contact));
+      this.$store.dispatch("addContact", extractDetails(contact));
     },
   },
 };

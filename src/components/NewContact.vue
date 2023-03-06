@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { extractDetails } from "../lib/transformers";
 import ContactForm from "./ContactForm";
 
 export default {
@@ -19,7 +20,7 @@ export default {
   computed: {},
   methods: {
     addContact(contact) {
-      this.$store.commit("addContact", contact);
+      this.$store.commit("addContact", extractDetails(contact));
     },
   },
 };

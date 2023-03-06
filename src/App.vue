@@ -1,12 +1,11 @@
 <template>
   <div id="app" class="container">
-    <Sidebar :contacts="contacts.all()" />
+    <Sidebar />
     <AppContent />
   </div>
 </template>
 
 <script>
-import Model from "@codeship/modelist";
 import AppContent from "./components/AppContent.vue";
 import Sidebar from "./components/Sidebar.vue";
 
@@ -14,10 +13,6 @@ export default {
   name: "App",
   data() {
     return {
-        contacts: new Model({
-        setPrimaryKey: true,
-        data: [{ name: "jane doe" }, { name: "john doe" }],
-      })
     }
   },
   mounted() {

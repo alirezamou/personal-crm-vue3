@@ -1,11 +1,12 @@
 import { createStore } from "vuex";
+import { collections } from "@/lib/firebase";
 import Model from "@codeship/modelist";
+import { v4 as uuidv4 } from "uuid";
+import { getDocs, addDoc } from "firebase/firestore/lite";
 
 export default createStore({
   state: {
-    contacts: new Model({
-      setPrimaryKey: true,
-    }),
+    contacts: new Model({}),
   },
   getters: {
     contacts(state) {
@@ -20,23 +21,32 @@ export default createStore({
       state.contacts.record(contact);
     },
   },
-  actions: {},
+  actions: {
+    addContact({ commit }, contact) {
+      const newContact = { id: uuidv4(), ...contact };
+      addDoc(collections.contacts, newContact)
+        .then((docRef) => {
+          commit("addContact", newContact);
+        })
+        .catch((err) => console.log("error occured"));
+    },
+  },
   modules: {},
   plugins: [
     (store) => {
-      let contacts = localStorage.getItem("contactsKey");
-      if (contacts) {
-        contacts = JSON.parse(contacts);
-        store.state.contacts.record(...contacts);
-      }
-      store.subscribe((mutation, state) => {
-        if (mutation.type === "addContact") {
-          localStorage.setItem(
-            "contactsKey",
-            JSON.stringify(state.contacts.all())
-          );
-        }
-      });
+      getDocs(collections.contacts)
+        .then((contactSnapshot) =>
+          contactSnapshot.docs.map((contact) => contact.data())
+        )
+        .then((cts) => {
+          store.state.contacts.record(...cts);
+        })
+        .catch((err) =>
+          console.log(
+            "error happened. CAN'T FETCH 'CONTACTS' FROM DATABASE",
+            err
+          )
+        );
     },
   ],
 });

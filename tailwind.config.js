@@ -3,6 +3,9 @@ module.exports = {
   content: ["./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      minWidth: {
+        "1/4": "25%",
+      },
       boxShadow: {
         default: "0 2px 4px 0 rgba(0,0,0,0.10)",
         md: "0 4px 8px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.08)",

@@ -22,7 +22,8 @@ export default {
   computed: {},
   methods: {
     addContact(payload) {
-      this.$emitter.emit("add-contact", payload);
+      // this.$emitter.emit("add-contact", payload);
+      this.$contacts.record({ name: payload.amount })
     },
   },
 };

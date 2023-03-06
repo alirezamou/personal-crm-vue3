@@ -16,14 +16,10 @@ export default {
   components: {
     ContactForm,
   },
-  data() {
-    return {};
-  },
   computed: {},
   methods: {
     addContact(payload) {
-      // this.$emitter.emit("add-contact", payload);
-      this.$contacts.record({ name: payload.amount })
+      this.$root.contacts.record({ name: payload.amount })
     },
   },
 };

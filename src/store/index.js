@@ -5,7 +5,6 @@ export default createStore({
   state: {
     contacts: new Model({
       setPrimaryKey: true,
-      data: [{ name: "jane doe" }, { name: "john doe" }],
     }),
   },
   getters: {

@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import Model from "@codeship/modelist";
 import AppContent from "./components/AppContent.vue";
 import Sidebar from "./components/Sidebar.vue";
 
@@ -15,13 +14,10 @@ export default {
   mounted() {
     this.$emitter.on("add-contact", (payload) => this.addContact(payload));
   },
-  data() {
-    return {
-      contacts: new Model({
-        setPrimaryKey: true,
-        data: [{ name: "jane doe" }, { name: "john doe" }],
-      }),
-    };
+  computed: {
+    contacts() {
+      return this.$contacts;
+    }
   },
   components: {
     AppContent,

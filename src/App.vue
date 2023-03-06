@@ -19,6 +19,13 @@ export default {
       return this.$contacts;
     }
   },
+  watch: {
+    $contacts: {
+      handler() {
+        this.contacts();
+      }
+    }
+  },
   components: {
     AppContent,
     Sidebar,

@@ -77,7 +77,7 @@ export default {
   },
   data() {
     return {
-      name: "",
+      contactName: "",
       contact: {
         main: {
           mail: {

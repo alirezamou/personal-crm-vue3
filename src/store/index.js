@@ -12,6 +12,9 @@ export default createStore({
     contacts(state) {
       return state.contacts;
     },
+    findContactById: (state) => (contactId) => {
+      return state.contacts.find(contactId).fold();
+    },
   },
   mutations: {},
   actions: {},

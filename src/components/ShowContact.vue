@@ -1,11 +1,12 @@
 <template>
   <div>
     <h1>Show Contact</h1>
-    {{ contact }}
+    {{ contact(contactId) }}
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "ShowContact",
   data() {
@@ -14,9 +15,9 @@ export default {
     };
   },
   computed: {
-    contact() {
-      return this.$root.contacts.find(this.contactId).fold(c => c);
-    }
+    ...mapGetters({
+      contact: "findContactById"
+    })
   },
   methods: {
     submit(data) {

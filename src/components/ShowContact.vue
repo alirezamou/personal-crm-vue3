@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Show Contact</h1>
-    {{ contactId }}
+    {{ contact }}
   </div>
 </template>
 
@@ -13,7 +13,11 @@ export default {
       contactId: this.$route.params.contactId,
     };
   },
-  computed: {},
+  computed: {
+    contact() {
+      return this.$root.contacts.find(this.contactId).fold(c => c);
+    }
+  },
   methods: {
     submit(data) {
       console.log(data);

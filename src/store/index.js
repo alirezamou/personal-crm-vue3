@@ -22,4 +22,21 @@ export default createStore({
   },
   actions: {},
   modules: {},
+  plugins: [
+    (store) => {
+      let contacts = localStorage.getItem("contactsKey");
+      if (contacts) {
+        contacts = JSON.parse(contacts);
+        store.state.contacts.record(contacts);
+      }
+      store.subscribe((mutation, state) => {
+        if (mutation.type === "addContact") {
+          localStorage.setItem(
+            "contactsKey",
+            JSON.stringify(state.contacts.all())
+          );
+        }
+      });
+    },
+  ],
 });

@@ -27,7 +27,7 @@ export default createStore({
       let contacts = localStorage.getItem("contactsKey");
       if (contacts) {
         contacts = JSON.parse(contacts);
-        store.state.contacts.record(contacts);
+        store.state.contacts.record(...contacts);
       }
       store.subscribe((mutation, state) => {
         if (mutation.type === "addContact") {

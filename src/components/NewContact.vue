@@ -3,7 +3,7 @@
     <h1 class="font-bold text-xl">Create New Contact</h1>
     <ContactForm
       submitButtonLabel="Create"
-      @submitContact="(e) => addContact(e)"
+      @submitContact="(contact) => addContact(contact)"
     />
   </div>
 </template>
@@ -18,8 +18,8 @@ export default {
   },
   computed: {},
   methods: {
-    addContact(payload) {
-      this.$root.contacts.record(payload);
+    addContact(contact) {
+      this.$store.commit("addContact", contact);
     },
   },
 };

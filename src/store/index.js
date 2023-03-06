@@ -16,7 +16,11 @@ export default createStore({
       return state.contacts.find(contactId).fold();
     },
   },
-  mutations: {},
+  mutations: {
+    addContact(state, contact) {
+      state.contacts.record(contact);
+    },
+  },
   actions: {},
   modules: {},
 });

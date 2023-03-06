@@ -2,6 +2,7 @@ import { createApp } from "vue";
 import mitt from "mitt";
 import App from "./App.vue";
 import "./registerServiceWorker";
+import "./lib/firebase";
 import router from "./router";
 import store from "./store";
 import "./assets/base.css";

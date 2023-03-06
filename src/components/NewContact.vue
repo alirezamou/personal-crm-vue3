@@ -19,7 +19,7 @@ export default {
   computed: {},
   methods: {
     addContact(payload) {
-      this.$root.contacts.record({ name: payload.amount })
+      this.$root.contacts.record(payload);
     },
   },
 };

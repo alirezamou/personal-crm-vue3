@@ -121,7 +121,15 @@ export default {
     submitContact(e) {
       e.preventDefault();
       this.contactName &&
-        this.$emit("submitContact", { amount: this.contactName });
+        this.$emit("submitContact",
+        { 
+          name: this.contactName,
+          contactDetails: this.contactDetails,
+          contactNotes: this.contactNotes,
+          quality: this.quality,
+          tags: this.tags,
+          contact: this.contact
+        });
       this.contactName = "";
     },
   },

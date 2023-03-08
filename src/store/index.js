@@ -4,7 +4,7 @@ import Model from "@codeship/modelist";
 import { v4 as uuidv4 } from "uuid";
 import { getDocs, addDoc } from "firebase/firestore/lite";
 
-export default createStore({
+export const structure = {
   state: {
     contacts: new Model({}),
   },
@@ -49,4 +49,9 @@ export default createStore({
         );
     },
   ],
-});
+};
+
+export default () => {
+  console.log("export default executed");
+  return createStore(structure);
+};

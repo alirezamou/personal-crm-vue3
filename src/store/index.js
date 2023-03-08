@@ -51,7 +51,4 @@ export const structure = {
   ],
 };
 
-export default () => {
-  console.log("export default executed");
-  return createStore(structure);
-};
+export default () => createStore(structure);

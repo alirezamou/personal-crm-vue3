@@ -31,12 +31,14 @@ describe("store", () => {
 });
 
 describe("actions", () => {
+  const { actions } = structure;
+
   test("addContact", async () => {
     const fakeStore = {
       commit: jest.fn(),
     };
     const fakeContact = { name: "john" };
-    await structure.actions.addContact(fakeStore, fakeContact);
+    await actions.addContact(fakeStore, fakeContact);
     expect(fakeStore.commit).toHaveBeenCalled();
   });
 });

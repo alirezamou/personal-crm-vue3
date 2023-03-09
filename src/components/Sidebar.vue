@@ -4,7 +4,8 @@
       <span>Contacts: {{ contacts.length }}</span>
       <router-link to="/" class="!text-[#000] hover:no-underline hover:text-[#000]">+ new contact</router-link>
     </div>
-    <ListComp :items="contacts.all()" itemKey="name" type="contact" />
+    <input type="text" placeholder="Search Name" class="input" v-model="searchQuery">
+    <ListComp :items="filteredContacts" itemKey="name" type="contact" />
   </div>
 </template>
 
@@ -13,8 +14,19 @@ import { mapGetters } from "vuex";
 import ListComp from "./general/ListComp.vue";
 export default {
   name: "SideBar",
+  data() {
+    return {
+      searchQuery: "",
+    }
+  },
   computed: {
     ...mapGetters(["contacts"]),
+    filteredContacts() {
+
+      return this.contacts.all().filter(contact => {
+        return contact.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      });
+    }
   },
   components: {
     ListComp,

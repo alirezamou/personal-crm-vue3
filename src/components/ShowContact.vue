@@ -1,11 +1,16 @@
 <template>
   <div>
-    <h1>Show Contact</h1>
-    {{ contact }}
+    <h1 class="font-bold text-3xl">Show Contact</h1>
+    <p v-if="!contact" class="text-slate-500">Contact not exists!</p>
+    <ContactForm submitButtonLabel="Update Contact" :inContact="contact" @submitContact="submit" />
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+import { extractDetails } from "@/lib/transformers";
+import ContactForm from "./ContactForm.vue";
+
 export default {
   name: "ShowContact",
   data() {
@@ -13,14 +18,22 @@ export default {
       contactId: this.$route.params.contactId,
     };
   },
+  components: {
+    ContactForm,
+  },
   computed: {
     contact() {
       return this.$store.getters.findContactById(this.contactId);
     }
   },
   methods: {
+    ...mapActions(["updateContactById"]),
     submit(data) {
-      console.log(data);
+      const contact = {
+        id: this.contactId,
+        ...extractDetails(data)
+      }
+      this.updateContactById(contact);
     },
   },
   watch: {

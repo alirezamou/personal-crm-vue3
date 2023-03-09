@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot 1`] = `
+<div id="sidebar" class="flex-1 min-w-1/4">
+  <div class="flex justify-between text-sm mb-2 font-semibold"><span>Contacts: </span>
+    <router-link to="/" class="!text-[#000] hover:no-underline hover:text-[#000]">+ new contact</router-link>
+  </div>
+  <ul>
+    <li>
+      <router-link to="[object Object]" class="contact">john</router-link>
+    </li>
+    <li>
+      <router-link to="[object Object]" class="contact">jane</router-link>
+    </li>
+  </ul>
+</div>
+`;

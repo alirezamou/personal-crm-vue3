@@ -27,3 +27,9 @@ test("Sidebar renders the ListComp", () => {
   const wrapper = factory();
   expect(wrapper.findComponent(ListComp).exists()).toBe(true);
 });
+
+test("snapshot", () => {
+  const wrapper = factory();
+
+  expect(wrapper.html()).toMatchSnapshot();
+});

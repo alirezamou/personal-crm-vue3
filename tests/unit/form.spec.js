@@ -48,3 +48,18 @@ test("twitter link is right", () => {
   wrapper.vm.contact.main.twitter.value = "twitterLink";
   expect(wrapper.vm.links.twitter).toBe("https://twitter.com/twitterLink");
 });
+
+test("form submits to outside", () => {
+  const wrapper = factory({
+    data() {
+      return {
+        contactName: "john",
+      };
+    },
+  });
+
+  const form = wrapper.find("form");
+  form.trigger("submit");
+
+  expect(wrapper.emitted().submitContact).toBeTruthy();
+});

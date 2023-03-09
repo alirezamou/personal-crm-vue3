@@ -13,6 +13,7 @@ import {
 export const structure = {
   state: {
     contacts: new Model({}),
+    isFetching: false,
   },
   getters: {
     contacts(state) {
@@ -62,12 +63,14 @@ export const structure = {
   modules: {},
   plugins: [
     (store) => {
+      store.state.isFetching = true;
       getDocs(collections.contacts)
         .then((contactSnapshot) =>
           contactSnapshot.docs.map((contact) => contact.data())
         )
         .then((cts) => {
           store.state.contacts.record(...cts);
+          store.state.isFetching = false;
         })
         .catch((err) =>
           console.log(

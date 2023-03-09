@@ -29,3 +29,22 @@ test("for name in data", () => {
   const field = wrapper.find("#contact-name");
   expect(field.element.value).toBe("john");
 });
+
+test("twitter link is right", () => {
+  const wrapper = factory({});
+  // needs to declare other fields like mail and phone.
+  //     data() {
+  //       return {
+  //         contact: {
+  //           main: {
+  //             twitter: {
+  //               value: "twitterLink",
+  //             },
+  //           },
+  //         },
+  //       };
+  //     },
+  //   });
+  wrapper.vm.contact.main.twitter.value = "twitterLink";
+  expect(wrapper.vm.links.twitter).toBe("https://twitter.com/twitterLink");
+});

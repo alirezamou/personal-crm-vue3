@@ -12,4 +12,4 @@ const app = createApp(App);
 const emitter = mitt();
 app.config.globalProperties.$emitter = emitter;
 
-app.use(store).use(router).mount("#app");
+app.use(store()).use(router).mount("#app");

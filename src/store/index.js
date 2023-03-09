@@ -31,13 +31,20 @@ export const structure = {
     },
   },
   actions: {
-    addContact({ commit }, contact) {
+    addContact({ commit }, payload) {
+      const { contact, router } = payload;
       const newContact = { id: uuidv4(), ...contact };
       addDoc(collections.contacts, newContact)
         .then((docRef) => {
           commit("addContact", newContact);
+          router.push({
+            name: "contact",
+            params: {
+              contactId: newContact.id,
+            },
+          });
         })
-        .catch((err) => console.log("error occured"));
+        .catch((err) => console.log("error occured: ", err));
     },
     updateContactById({ commit }, contact) {
       const q = query(collections.contacts, where("id", "==", contact.id));

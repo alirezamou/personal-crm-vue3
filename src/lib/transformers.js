@@ -1,7 +1,7 @@
 import defaultTo from "lodash/defaultTo";
 
-export const mergeDetails = function($data, details) {
-  $data.name = details.name;
+export const mergeDetails = function ($data, details) {
+  $data.contactName = details.name;
   $data.contact.main.mail.value = details.contact.mail;
   $data.contact.main.phone.value = details.contact.phone;
   $data.contact.main.twitter.value = details.contact.twitter;
@@ -11,7 +11,7 @@ export const mergeDetails = function($data, details) {
   $data.contactNotes = details.contact.notes;
 };
 
-export const extractDetails = function($data) {
+export const extractDetails = function ($data) {
   return {
     name: $data.name,
     contact: {
@@ -21,12 +21,12 @@ export const extractDetails = function($data) {
       tags: $data.tags,
       details: $data.contactDetails,
       quality: $data.quality,
-      notes: defaultTo($data.contactNotes, "")
-    }
+      notes: defaultTo($data.contactNotes, ""),
+    },
   };
 };
 
 export default {
   cleanToData: mergeDetails,
-  dataToClean: extractDetails
+  dataToClean: extractDetails,
 };

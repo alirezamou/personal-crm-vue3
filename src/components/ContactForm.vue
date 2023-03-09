@@ -71,10 +71,16 @@
 </template>
 
 <script>
+import { mergeDetails } from "../lib/transformers";
+import { isEmpty } from "lodash";
+
 export default {
   name: "ContactForm",
   props: {
     submitButtonLabel: String,
+    inContact: {
+      default: function () { return {}; }
+    },
   },
   data() {
     return {
@@ -134,5 +140,14 @@ export default {
       this.contactName = "";
     },
   },
+  watch: {
+    inContact: {
+      immediate: true,
+      handler(val) {
+        if(isEmpty(val)) return;
+        mergeDetails(this, this.inContact);
+      }
+    }
+  }
 };
 </script>

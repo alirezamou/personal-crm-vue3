@@ -1,8 +1,8 @@
 <template>
   <div>
     <h1 class="font-bold text-3xl">Show Contact</h1>
-    <p v-if="!contact" class="text-slate-500">Contact not exists!</p>
-    <ContactForm submitButtonLabel="Update Contact" :inContact="contact" @submitContact="submit" />
+    <p v-if="!contact" class="text-slate-500 text-center text-3xl">Contact not exists!</p>
+    <ContactForm v-else submitButtonLabel="Update Contact" :inContact="contact" @submitContact="submit" />
   </div>
 </template>
 

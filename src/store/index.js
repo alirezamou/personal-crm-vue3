@@ -2,7 +2,13 @@ import { createStore } from "vuex";
 import { collections } from "@/lib/firebase";
 import Model from "@codeship/modelist";
 import { v4 as uuidv4 } from "uuid";
-import { getDocs, addDoc } from "firebase/firestore/lite";
+import {
+  getDocs,
+  addDoc,
+  where,
+  query,
+  updateDoc,
+} from "firebase/firestore/lite";
 
 export const structure = {
   state: {
@@ -13,12 +19,15 @@ export const structure = {
       return state.contacts;
     },
     findContactById: (state) => (contactId) => {
-      return state.contacts.find(contactId).fold();
+      return state.contacts.find(contactId)?.fold();
     },
   },
   mutations: {
     addContact(state, contact) {
       state.contacts.record(contact);
+    },
+    updateContact(state, contact) {
+      state.contacts.update(contact.id, contact);
     },
   },
   actions: {
@@ -29,6 +38,18 @@ export const structure = {
           commit("addContact", newContact);
         })
         .catch((err) => console.log("error occured"));
+    },
+    updateContactById({ commit }, contact) {
+      const q = query(collections.contacts, where("id", "==", contact.id));
+      getDocs(q)
+        .then((querySnapshot) => {
+          // it returns just one doc because the query calause 'where' is checked by 'id' which is unique
+          querySnapshot.docs.forEach((doc) => {
+            updateDoc(doc.ref, contact);
+            commit("updateContact", contact);
+          });
+        })
+        .catch((error) => console.log("error occured: ", error));
     },
   },
   modules: {},

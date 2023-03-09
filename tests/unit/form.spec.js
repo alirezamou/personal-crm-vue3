@@ -15,3 +15,17 @@ test("pass down the props", () => {
   });
   expect(vm.submitButtonLabel).toBe("test");
 });
+
+test("for name in data", () => {
+  const wrapper = factory({
+    data() {
+      return {
+        contactName: "john",
+      };
+    },
+  });
+
+  expect(wrapper.vm.contactName).toBe("john");
+  const field = wrapper.find("#contact-name");
+  expect(field.element.value).toBe("john");
+});

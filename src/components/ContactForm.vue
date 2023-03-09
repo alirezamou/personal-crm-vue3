@@ -1,6 +1,7 @@
 <template>
   <form @submit="(e) => submitContact(e)">
     <input
+      id="contact-name"
       v-model="contactName"
       type="text"
       class="input"
